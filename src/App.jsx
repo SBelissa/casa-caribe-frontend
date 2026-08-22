@@ -105,12 +105,25 @@ export default function App() {
     }
   }, [view]);
 
+  // NOTE: adjust "rol" to whatever field your /api/auth/login response actually
+  // uses for the user's role (e.g. currentUser.role, currentUser.is_admin, etc.)
+  const isAdmin = currentUser?.rol === "admin";
+
   useEffect(() => {
     if (currentUser && (view === "mine" || view === "staff" || view === "book")) {
       fetchReservas();
     }
     setMobileNavOpen(false);
   }, [currentUser, view, fetchReservas]);
+
+  // Client-side guard: this only hides the UI. The API must reject non-admins
+  // independently — see note below the component.
+  useEffect(() => {
+    if (view === "staff" && !isAdmin) {
+      showToast("No tienes permisos para ver esta sección", "error");
+      setView("book");
+    }
+  }, [view, isAdmin, showToast]);
 
   /* ---------------- Auth ---------------- */
 
@@ -335,7 +348,7 @@ export default function App() {
   const navItems = [
     { key: "book", label: "Reservar" },
     { key: "mine", label: "Mis reservas" },
-    { key: "staff", label: "Panel Staff" },
+    ...(isAdmin ? [{ key: "staff", label: "Panel Staff" }] : []),
   ];
 
   /* ---------------- Render ---------------- */
@@ -740,7 +753,7 @@ export default function App() {
         </div>
       )}
 
-      {view === "staff" && currentUser && (
+      {view === "staff" && currentUser && isAdmin && (
         <div className="cc-view px-5 py-10" style={{ background: CREAM, minHeight: "70vh" }}>
           <div className="max-w-2xl mx-auto space-y-4">
             <div className="flex items-center justify-between">
