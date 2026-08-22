@@ -4,7 +4,7 @@ import {
   CheckCircle2, XCircle, LogOut, Anchor, Sparkles, X, MailCheck,
 } from "lucide-react";
 
-// Ajusta esta URL con la dirección de tu servicio en Render cuando lo despliegues
+// Dirección de la API en Render
 const API_URL = "https://casa-caribe-api.onrender.com/api";
 
 const INK = "#20261F";
