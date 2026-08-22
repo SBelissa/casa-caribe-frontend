@@ -5,7 +5,7 @@ import {
 } from "lucide-react";
 
 // Ajusta esta URL con la dirección de tu servicio en Render cuando lo despliegues
-const API_URL = "https://tu-app-en-render.onrender.com/api";
+const API_URL = "https://casa-caribe-api.onrender.com/";
 
 const INK = "#20261F";
 const CREAM = "#FBF3E6";
