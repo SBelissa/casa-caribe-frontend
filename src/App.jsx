@@ -291,19 +291,55 @@ export default function App() {
       `}</style>
 
       {/* HEADER */}
-      <header className="w-full sticky top-0 z-30" style={{ background: TEAL_DEEP, borderBottom: `1px solid ${TEAL}` }}>
+      <header className="w-full sticky top-0 z-30 shadow-md" style={{ background: TEAL_DEEP, borderBottom: `1px solid ${TEAL}` }}>
         <div className="max-w-5xl mx-auto flex items-center justify-between px-5 py-4">
-          <button className="flex items-center gap-2" onClick={() => setView(currentUser ? "book" : "landing")}>
-            <Waves size={22} color={GOLD} />
-            <span style={{ color: CREAM, fontSize: 21, fontFamily: "'Fraunces', serif" }}>Casa Caribe</span>
+          <button className="flex items-center gap-2 bg-transparent border-0 cursor-pointer" onClick={() => setView(currentUser ? "book" : "landing")}>
+            <Waves size={24} color={GOLD} />
+            <span style={{ color: CREAM, fontSize: 22, fontWeight: 600, fontFamily: "'Fraunces', serif" }}>Casa Caribe</span>
           </button>
 
           <nav className="hidden sm:flex items-center gap-6">
             {currentUser && (
               <>
-                <NavLink label="Reservar" active={view === "book"} onClick={() => setView("book")} />
-                <NavLink label="Mis reservas" active={view === "mine"} onClick={() => setView("mine")} />
-                <NavLink label="Panel Staff" active={view === "staff"} onClick={() => setView("staff")} />
+                <button
+                  onClick={() => setView("book")}
+                  className="text-sm font-medium tracking-wide transition-all bg-transparent border-0 cursor-pointer"
+                  style={{
+                    color: view === "book" ? GOLD : CREAM,
+                    opacity: view === "book" ? 1 : 0.85,
+                    fontFamily: "'Work Sans', sans-serif",
+                    borderBottom: view === "book" ? `2px solid ${GOLD}` : "2px solid transparent",
+                    paddingBottom: 4,
+                  }}
+                >
+                  Reservar
+                </button>
+                <button
+                  onClick={() => setView("mine")}
+                  className="text-sm font-medium tracking-wide transition-all bg-transparent border-0 cursor-pointer"
+                  style={{
+                    color: view === "mine" ? GOLD : CREAM,
+                    opacity: view === "mine" ? 1 : 0.85,
+                    fontFamily: "'Work Sans', sans-serif",
+                    borderBottom: view === "mine" ? `2px solid ${GOLD}` : "2px solid transparent",
+                    paddingBottom: 4,
+                  }}
+                >
+                  Mis reservas
+                </button>
+                <button
+                  onClick={() => setView("staff")}
+                  className="text-sm font-medium tracking-wide transition-all bg-transparent border-0 cursor-pointer"
+                  style={{
+                    color: view === "staff" ? GOLD : CREAM,
+                    opacity: view === "staff" ? 1 : 0.85,
+                    fontFamily: "'Work Sans', sans-serif",
+                    borderBottom: view === "staff" ? `2px solid ${GOLD}` : "2px solid transparent",
+                    paddingBottom: 4,
+                  }}
+                >
+                  Panel Staff
+                </button>
               </>
             )}
           </nav>
@@ -312,15 +348,15 @@ export default function App() {
             {currentUser ? (
               <button
                 onClick={handleLogout}
-                className="flex items-center gap-1.5 text-sm px-3 py-1.5 rounded-full"
-                style={{ color: CREAM, border: `1px solid ${TEAL}`, fontFamily: "'Work Sans', sans-serif" }}
+                className="flex items-center gap-1.5 text-sm px-3.5 py-1.5 rounded-full font-medium transition-colors cursor-pointer"
+                style={{ color: CREAM, border: `1px solid ${SEAFOAM}`, backgroundColor: "rgba(255,255,255,0.08)", fontFamily: "'Work Sans', sans-serif" }}
               >
-                <LogOut size={14} /> Salir
+                <LogOut size={15} color={GOLD} /> Salir
               </button>
             ) : (
               <button
                 onClick={() => setView("auth")}
-                className="text-sm px-4 py-1.5 rounded-full font-medium"
+                className="text-sm px-4 py-2 rounded-full font-medium shadow-md cursor-pointer border-0"
                 style={{ background: CORAL, color: CREAM, fontFamily: "'Work Sans', sans-serif" }}
               >
                 Ingresar / Registro
